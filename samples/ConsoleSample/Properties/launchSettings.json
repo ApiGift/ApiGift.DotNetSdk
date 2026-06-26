@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "ConsoleSample - Sandbox": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "APIGIFT_BASE_URL": "https://sandbox.apigift.com/",
+        "APIGIFT_ACCESS_KEY": "",
+        "APIGIFT_SECRET_KEY": ""
+      }
+    },
+    "ConsoleSample - Production": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "APIGIFT_BASE_URL": "https://api.apigift.com/",
+        "APIGIFT_ACCESS_KEY": "",
+        "APIGIFT_SECRET_KEY": ""
+      }
+    }
+  }
+}

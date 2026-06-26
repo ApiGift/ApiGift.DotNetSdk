@@ -1,0 +1,70 @@
+name: Publish NuGet
+
+on:
+  release:
+    types: [published]
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    name: Pack and publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore ApiGift.DotNetSdk.sln
+
+      - name: Build
+        run: dotnet build ApiGift.DotNetSdk.sln -c Release --no-restore
+
+      - name: Test
+        run: dotnet test ApiGift.DotNetSdk.sln -c Release --no-build
+
+      - name: Pack
+        run: dotnet pack ApiGift.DotNetSdk.sln -c Release --no-build -o artifacts/packages
+
+      # NuGet.org Trusted Publishing must be configured before this workflow can publish:
+      # - Repository owner: ApiGift
+      # - Repository: ApiGift.DotNetSdk
+      # - Workflow file: publish-nuget.yml
+      # - Package owner/user below must match the configured nuget.org owner.
+      # This workflow intentionally uses OIDC and does not use NuGet API-key secrets.
+      - name: NuGet login
+        id: nuget-login
+        uses: NuGet/login@v1
+        with:
+          user: ApiGift
+
+      - name: Publish packages
+        shell: bash
+        run: |
+          for package in artifacts/packages/*.nupkg; do
+            dotnet nuget push "$package" \
+              --api-key "${{ steps.nuget-login.outputs.NUGET_API_KEY }}" \
+              --source https://api.nuget.org/v3/index.json \
+              --skip-duplicate
+          done
+
+      - name: Publish symbols
+        shell: bash
+        run: |
+          for package in artifacts/packages/*.snupkg; do
+            dotnet nuget push "$package" \
+              --api-key "${{ steps.nuget-login.outputs.NUGET_API_KEY }}" \
+              --source https://api.nuget.org/v3/index.json \
+              --skip-duplicate
+          done

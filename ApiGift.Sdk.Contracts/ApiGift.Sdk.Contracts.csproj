@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <PackageId>ApiGift.Sdk.Contracts</PackageId>
+    <Title>ApiGift .NET SDK Contracts</Title>
+    <Authors>ApiGift</Authors>
+    <Company>ApiGift</Company>
+    <Product>ApiGift .NET SDK</Product>
+    <Description>Public contract types for the official ApiGift Shop Gateway v2 .NET SDK.</Description>
+    <PackageTags>apigift;gift-card;gift-cards;sdk;dotnet;api;contracts</PackageTags>
+    <RepositoryUrl>https://github.com/ApiGift/ApiGift.DotNetSdk</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/ApiGift/ApiGift.DotNetSdk</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReleaseNotes>Initial public contracts for the v2-only ApiGift .NET SDK preview.</PackageReleaseNotes>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EnablePackageValidation>true</EnablePackageValidation>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" Link="README.md" />
+    <None Include="..\LICENSE" Pack="true" PackagePath="\" Link="LICENSE" />
+  </ItemGroup>
+
+</Project>
