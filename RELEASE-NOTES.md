@@ -2,6 +2,14 @@
 
 Repository: [ApiGift.DotNetSdk](https://github.com/ApiGift/ApiGift.DotNetSdk)
 
+## 0.1.0-preview.4
+
+- Publish package and symbol artifacts through the automated GitHub workflow.
+- Keep package dependency publishing ordered so `ApiGift.Sdk.Contracts` is
+  available before `ApiGift.Sdk`.
+- Filter symbol artifacts before publishing so every PDB in a symbols package
+  has a matching DLL in the associated NuGet package.
+
 ## 0.1.0-preview.1
 
 Initial preview release of the official ApiGift .NET SDK:

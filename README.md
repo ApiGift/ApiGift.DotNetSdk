@@ -14,7 +14,7 @@ GitHub repository: [ApiGift.DotNetSdk](https://github.com/ApiGift/ApiGift.DotNet
 ## Installation
 
 ```powershell
-dotnet add package ApiGift.Sdk --version 0.1.0-preview.1
+dotnet add package ApiGift.Sdk --version 0.1.0-preview.4
 ```
 
 Most applications only need `ApiGift.Sdk`. The `ApiGift.Sdk.Contracts` package
