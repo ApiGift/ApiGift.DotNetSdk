@@ -67,6 +67,8 @@ public sealed class ProductDefinition
 {
     /// <summary>Gets or sets the fields required or supported by this product.</summary>
     public List<ProductFieldDefinition> Fields { get; set; } = [];
+    /// <summary>Gets or sets the inputs required before purchasing this product.</summary>
+    public List<ProductPurchaseInputDefinition> PurchaseInputs { get; set; } = [];
 }
 
 /// <summary>Represents one product-specific field definition.</summary>
@@ -80,6 +82,23 @@ public sealed class ProductFieldDefinition
     public bool IsUniqueValue { get; set; }
     /// <summary>Gets or sets optional usage guidance for this field.</summary>
     public string? Description { get; set; }
+}
+
+/// <summary>Represents one product purchase input definition.</summary>
+public sealed class ProductPurchaseInputDefinition
+{
+    /// <summary>Gets or sets the input key used in API request payloads.</summary>
+    public string Key { get; set; } = string.Empty;
+    /// <summary>Gets or sets whether this input is required.</summary>
+    public bool Required { get; set; }
+    /// <summary>Gets or sets optional regex validation.</summary>
+    public string? Pattern { get; set; }
+    /// <summary>Gets or sets technical guidance for integrations.</summary>
+    public string? TechnicalHint { get; set; }
+    /// <summary>Gets or sets human-friendly guidance for end users.</summary>
+    public string? UserHint { get; set; }
+    /// <summary>Gets or sets the display name.</summary>
+    public string? DisplayName { get; set; }
 }
 
 /// <summary>Represents merchant inventory availability for a product.</summary>
@@ -102,6 +121,8 @@ public sealed class ProductMarketStatus
     public double CurrentSupplyPrice { get; set; }
     /// <summary>Gets or sets market availability.</summary>
     public ProductAvailabilityStatus AvailabilityStatus { get; set; }
+    /// <summary>Gets or sets product-specific input/identity field definitions.</summary>
+    public ProductDefinition Definition { get; set; } = new();
     /// <summary>Gets or sets automatic supply information.</summary>
     public ProductAutoSupplyInfo AutoSupply { get; set; } = new();
 }
