@@ -23,7 +23,11 @@ public sealed class OrdersClient : IOrdersClient
             "v2/Subscriptions",
             request,
             cancellationToken,
-            [HttpStatusCode.BadRequest, HttpStatusCode.Conflict]);
+            [
+                HttpStatusCode.BadRequest,
+                HttpStatusCode.PaymentRequired,
+                HttpStatusCode.Conflict
+            ]);
     }
 
     /// <inheritdoc />
