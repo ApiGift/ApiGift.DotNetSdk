@@ -84,6 +84,13 @@ public sealed class ProductsClient : IProductsClient
             query.Add($"search={Uri.EscapeDataString(request.Search)}");
         }
 
+        if (request.TranslationLanguages is not null)
+        {
+            query.AddRange(request.TranslationLanguages
+                .Where(language => !string.IsNullOrWhiteSpace(language))
+                .Select(language => $"translationLanguages={Uri.EscapeDataString(language)}"));
+        }
+
         return query.Count == 0
             ? "v2/Products"
             : $"v2/Products?{string.Join("&", query)}";

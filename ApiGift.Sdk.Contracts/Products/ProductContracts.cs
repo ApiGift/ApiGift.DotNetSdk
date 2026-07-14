@@ -15,6 +15,8 @@ public sealed class GetProductsRequest
     public Guid? RegionId { get; set; }
     /// <summary>Gets or sets the free-text search term.</summary>
     public string? Search { get; set; }
+    /// <summary>Gets or sets the language codes to return translations for. When null or empty, product translations are not returned.</summary>
+    public IReadOnlyCollection<string>? TranslationLanguages { get; set; }
 }
 
 /// <summary>Represents a product returned by the v2 catalog.</summary>
@@ -40,6 +42,19 @@ public sealed class ProductSummary
     public ProductVariant Variant { get; set; } = new();
     /// <summary>Gets or sets product-specific input/identity field definitions.</summary>
     public ProductDefinition Definition { get; set; } = new();
+    /// <summary>Gets or sets translations for the requested languages. Null when no translation languages were requested.</summary>
+    public List<ProductTranslation>? Translations { get; set; }
+}
+
+/// <summary>Represents a product translation for one language.</summary>
+public sealed class ProductTranslation
+{
+    /// <summary>Gets or sets the language code (e.g. en, fa, ar).</summary>
+    public string LanguageCode { get; set; } = string.Empty;
+    /// <summary>Gets or sets the translated product title.</summary>
+    public string Title { get; set; } = string.Empty;
+    /// <summary>Gets or sets the translated variant display name.</summary>
+    public string? VariantDisplayName { get; set; }
 }
 
 /// <summary>Identifies how a product is fulfilled.</summary>

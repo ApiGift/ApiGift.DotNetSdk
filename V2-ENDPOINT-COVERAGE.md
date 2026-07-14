@@ -40,8 +40,9 @@ Discovery source:
 ## Contracts generated
 
 - Common: `ProductVariantType`, `SupportTicketStatus`
-- Categories: `ProductCategory`, `CategoryRegion`, `ProductFamily`
-- Products: `GetProductsRequest`, `ProductSummary`,
+- Categories: `GetCategoriesRequest`, `ProductCategory`, `CategoryRegion`,
+  `ProductFamily`, `CategoryTranslation`, `CategoryRegionTranslation`
+- Products: `GetProductsRequest`, `ProductSummary`, `ProductTranslation`,
   `ProductFulfillmentMethod`, `ProductVariant`, `ProductInventoryStatus`,
   `ProductMarketStatus`, `ProductAvailabilityStatus`, `ProductAutoSupplyInfo`,
   `ProductAutoSupplyBlockReason`
