@@ -25,17 +25,30 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
+      # The package version comes from the tag (v1.2.3 -> 1.2.3), not from
+      # Directory.Build.props, so a stale hardcoded version can never be
+      # silently skipped by --skip-duplicate again.
+      - name: Set version from tag
+        shell: bash
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            echo "PKG_VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+          else
+            echo "This workflow must run from a v* tag or release; got $GITHUB_REF" >&2
+            exit 1
+          fi
+
       - name: Restore
         run: dotnet restore ApiGift.DotNetSdk.sln
 
       - name: Build
-        run: dotnet build ApiGift.DotNetSdk.sln -c Release --no-restore
+        run: dotnet build ApiGift.DotNetSdk.sln -c Release --no-restore -p:Version=$PKG_VERSION
 
       - name: Test
         run: dotnet test ApiGift.DotNetSdk.sln -c Release --no-build
 
       - name: Pack
-        run: dotnet pack ApiGift.DotNetSdk.sln -c Release --no-build -o artifacts/packages
+        run: dotnet pack ApiGift.DotNetSdk.sln -c Release --no-build -o artifacts/packages -p:Version=$PKG_VERSION
 
       - name: Normalize symbols packages
         shell: bash
